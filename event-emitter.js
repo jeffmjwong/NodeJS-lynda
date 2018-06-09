@@ -1,26 +1,15 @@
-const EventEmitter = require('events').EventEmitter;
-const util = require('util');
-
-const Person = function(name) {
-  this.name = name;
-};
-
-util.inherits(Person, EventEmitter);
+const Person = require('./lib/Person');
 
 const ben = new Person('Ben Franklin');
-const scott = new Person('Scott');
+const george = new Person('George Washington');
+
+george.on('speak', function(said) {
+  console.log(`${this.name} -> ${said}`);
+});
 
 ben.on('speak', function(said) {
   console.log(`${this.name}: ${said}`);
 });
 
-ben.on('speak', function(said) {
-  console.log(`${this.name}: ${said}hahaha`);
-});
-
-scott.on('speak', function(said) {
-  console.log(`${this.name}: ${said}hahaha1312312312`);
-});
-
-ben.emit('speak', 'HEHEHE');
-scott.emit('speak', 'aa');
+ben.emit('speak', 'You may delay, but time will not.');
+george.emit('speak', 'Honesty is the best virtue.');
