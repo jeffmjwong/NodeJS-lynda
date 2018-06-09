@@ -1,9 +1,26 @@
-const events = require('events');
+const EventEmitter = require('events').EventEmitter;
+const util = require('util');
 
-const emitter = new events.EventEmitter();
+const Person = function(name) {
+  this.name = name;
+};
 
-emitter.on('customEvent', (message, status) => {
-  console.log(`${status}: ${message}`)
+util.inherits(Person, EventEmitter);
+
+const ben = new Person('Ben Franklin');
+const scott = new Person('Scott');
+
+ben.on('speak', function(said) {
+  console.log(`${this.name}: ${said}`);
 });
 
-emitter.emit('customEvent', 'Hello world', 200);
+ben.on('speak', function(said) {
+  console.log(`${this.name}: ${said}hahaha`);
+});
+
+scott.on('speak', function(said) {
+  console.log(`${this.name}: ${said}hahaha1312312312`);
+});
+
+ben.emit('speak', 'HEHEHE');
+scott.emit('speak', 'aa');
