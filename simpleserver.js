@@ -1,3 +1,5 @@
+/* jshint esnext: true */
+
 const http = require('http');
 
 http.createServer((request, response) => {
@@ -13,7 +15,7 @@ http.createServer((request, response) => {
         <p>You are welcome</p>
       </body>
     </html>
-  `)
+  `);
 }).listen(4321);
 
-console.log('Server is listening on port 4321...');
+console.log('Simple Server is listening on port 4321...');
